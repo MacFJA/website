@@ -115,14 +115,14 @@ import { functionThatUsesFlatMap } from "./utils.js";
 
 ## Side effect imports
 
-A [side effect imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#forms_of_import_declarations) are import statements that don't import any name:
+A [side effect import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#forms_of_import_declarations) are import statements that usually don't import any name:
 
 ```js
 import "./global.js"
 ```
 
-Since it is hard to determine which side effect the module brought,
-The import organizer creates a group for every side effect imports.
+Since it is hard to determine which side effects a module triggers,
+the import sorting creates a group for every side effect imports.
 This means that imports that appear before and imports that appear after a side effect imports are independently sorted.
 
 For example, the following imports:
