@@ -113,6 +113,40 @@ import "../polyfills/array/flatMap";
 import { functionThatUsesFlatMap } from "./utils.js";
 ```
 
+## Side effect imports
+
+A [side effect imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#forms_of_import_declarations) are import statements that don't import any name:
+
+```js
+import "./global.js"
+```
+
+Since it is hard to determine which side effect the module brought,
+The import organizer creates a group for every side effect imports.
+This means that imports that appear before and imports that appear after a side effect imports are independently sorted.
+
+For example, the following imports:
+
+```js
+import sibling from "./sibling";
+import { internal } from "#internal";
+import "z"
+import "a"
+import React from "react";
+import assert from "node:assert";
+```
+
+are sorted as follows:
+
+```js
+import { internal } from "#internal";
+import sibling from "./sibling";
+import "z"
+import "a"
+import assert from "node:assert";
+import React from "react";
+```
+
 ## Import sorting via CLI
 
 Using the command `check`, with the option `--apply`.
